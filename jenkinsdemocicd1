@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('install') {
+            steps {
+                sh '''mvn install'''
+            }
+        }
+        stages {
+        stage('clean') {
+            steps {
+                sh '''mvn clean package'''
+            }
+        }
+        stages {
+        stage('deploy') {
+            steps {
+                archiveArtifacts artifacts: 'arti', followSymlinks: false
+            }
+        }
+    }
+}
